@@ -1,4 +1,5 @@
 import { Home } from '../pages/Home/Home';
+
 import { paths } from './paths';
 
 export const routesConfig = [

@@ -7,7 +7,8 @@ export const Navigation = () => {
     <nav>
       <List>
         <LinksWrapper>
-          <Link to={paths.home}>Home</Link>
+          <Link to={paths.products}>Products</Link>
+          <Link to={paths.addProduct}>Add product</Link>
         </LinksWrapper>
       </List>
     </nav>

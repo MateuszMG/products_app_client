@@ -1,5 +1,6 @@
 export const paths = {
-  home: '/',
+  products: '/',
+  addProduct: '/product/add',
 
   all: '*',
 };

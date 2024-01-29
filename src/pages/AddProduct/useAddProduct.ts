@@ -26,7 +26,11 @@ export const useAddProduct = () => {
     initialValues,
     validationSchema: addProductSchema,
     onReset: () => initialValues,
-    onSubmit: (values) => dispatch(addProductAsync(values)),
+    onSubmit: (values) => {
+      dispatch(addProductAsync(values)).then(() => {
+        formik.resetForm();
+      });
+    },
   });
 
   const categoryOptions: Option[] = useMemo(

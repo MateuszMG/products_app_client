@@ -6,7 +6,7 @@ import { errorToast } from '../../utils/toast/errorToast';
 import { Category } from './categoryTypes';
 
 export const getCategoriesAsync = createAsyncThunk<Category[]>(
-  'products/addProduct',
+  'categories/getCategories',
   async (_, { rejectWithValue }) => {
     try {
       const res = await axiosInstance.get(`/api/categories`);

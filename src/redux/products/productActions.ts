@@ -15,8 +15,6 @@ export const addProductAsync = createAsyncThunk<Product, AddProductSchema>(
 
       return res.data.newProduct;
     } catch (error) {
-      console.log('error', error);
-
       errorToast(error);
       rejectWithValue(error);
     }

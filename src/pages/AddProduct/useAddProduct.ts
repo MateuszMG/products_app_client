@@ -1,12 +1,13 @@
 import { useFormik } from 'formik';
+import { useEffect, useMemo } from 'react';
 import * as Yup from 'yup';
 
 import { Option } from '../../components/global/inputs/SelectInput/SelectInput';
 
+import { getCategoriesAsync } from '../../redux/categories/categoryActions';
 import { addProductAsync } from '../../redux/products/productActions';
 import { useAppDispatch, useAppSelector } from '../../redux/store';
 
-const mockedCategories = ['smartphones', 'laptops', 'displays'];
 const initialValues = {
   name: '',
   price: 0,
@@ -17,7 +18,9 @@ const initialValues = {
 
 export const useAddProduct = () => {
   const dispatch = useAppDispatch();
-  const { loading } = useAppSelector().products;
+  const { loading: addProductsLoading } = useAppSelector().products;
+  const { categories, loading: getCategoriesLoading } =
+    useAppSelector().categories;
 
   const formik = useFormik({
     initialValues,
@@ -26,11 +29,13 @@ export const useAddProduct = () => {
     onSubmit: (values) => dispatch(addProductAsync(values)),
   });
 
-  const categoryOptions: Option[] = ['', ...mockedCategories].map(
-    (category) => ({
-      label: category,
-      value: category,
-    }),
+  const categoryOptions: Option[] = useMemo(
+    () =>
+      ['', ...categories].map((category) => ({
+        label: category,
+        value: category,
+      })),
+    [categories.length],
   );
 
   const handleCategoryChange = (optionValue: Option['value']) => {
@@ -53,6 +58,12 @@ export const useAddProduct = () => {
   });
 
   const isError = !!Object.keys(formik.errors).length;
+  const isLoading = addProductsLoading || getCategoriesLoading;
+
+  useEffect(() => {
+    if (categories.length) return;
+    dispatch(getCategoriesAsync());
+  }, [categories.length]);
 
   return {
     categoryOptions,
@@ -60,7 +71,7 @@ export const useAddProduct = () => {
     formik,
     handleCategoryChange,
     isError,
-    loading,
+    isLoading,
   };
 };
 

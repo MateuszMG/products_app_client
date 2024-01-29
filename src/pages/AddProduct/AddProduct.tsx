@@ -15,7 +15,7 @@ export const AddProduct = () => {
     formik,
     handleCategoryChange,
     isError,
-    loading,
+    isLoading,
   } = useAddProduct();
 
   return (
@@ -34,10 +34,10 @@ export const AddProduct = () => {
         <Input {...createInputProps('productionDate', 'date')} />
 
         <Form.ButtonsWrapper>
-          <Button isLoading={loading} isError={isError} type='reset'>
+          <Button isLoading={isLoading} isError={isError} type='reset'>
             Reset
           </Button>
-          <Button isLoading={loading} isError={isError} type='submit'>
+          <Button isLoading={isLoading} isError={isError} type='submit'>
             Submit
           </Button>
         </Form.ButtonsWrapper>

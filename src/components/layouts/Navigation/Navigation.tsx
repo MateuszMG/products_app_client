@@ -8,7 +8,6 @@ export const Navigation = () => {
       <List>
         <LinksWrapper>
           <Link to={paths.products}>Products</Link>
-          <Link to={paths.addProduct}>Add product</Link>
         </LinksWrapper>
       </List>
     </nav>

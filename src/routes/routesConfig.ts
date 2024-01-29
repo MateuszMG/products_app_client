@@ -1,11 +1,11 @@
 import { AddProduct } from '../pages/AddProduct/AddProduct';
-import { Home } from '../pages/Home/Home';
+import { Products } from '../pages/Products/Products';
 
 import { paths } from './paths';
 
 export const routesConfig = [
   {
-    component: Home,
+    component: Products,
     path: paths.products,
   },
   {

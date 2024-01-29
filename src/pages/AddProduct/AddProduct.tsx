@@ -9,8 +9,14 @@ import { Container } from './AddProduct.styled';
 import { useAddProduct } from './useAddProduct';
 
 export const AddProduct = () => {
-  const { categoriesOptions, createInputProps, formik, handleCategoryChange } =
-    useAddProduct();
+  const {
+    categoryOptions,
+    createInputProps,
+    formik,
+    handleCategoryChange,
+    isError,
+    loading,
+  } = useAddProduct();
 
   return (
     <Container>
@@ -23,13 +29,17 @@ export const AddProduct = () => {
         <SelectInput
           {...createInputProps('category')}
           onChange={handleCategoryChange}
-          options={categoriesOptions}
+          options={categoryOptions}
         />
         <Input {...createInputProps('productionDate', 'date')} />
 
         <Form.ButtonsWrapper>
-          <Button type='reset'>Reset</Button>
-          <Button type='submit'>Submit</Button>
+          <Button isLoading={loading} isError={isError} type='reset'>
+            Reset
+          </Button>
+          <Button isLoading={loading} isError={isError} type='submit'>
+            Submit
+          </Button>
         </Form.ButtonsWrapper>
       </Form>
     </Container>

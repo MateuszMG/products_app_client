@@ -13,6 +13,7 @@ import {
   editProductAsync,
   getProductAsync,
 } from '../../redux/products/productActions';
+import { Product } from '../../redux/products/productTypes';
 import { useAppDispatch, useAppSelector } from '../../redux/store';
 
 interface Params {
@@ -33,9 +34,9 @@ export const useEditProduct = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
-  const { loading: editProductsLoading, selectedProduct } =
+  const { loading: productsLoading, selectedProduct } =
     useAppSelector().products;
-  const { categoryOptions, loading: getCategoriesLoading } =
+  const { categoryOptions, loading: categoriesLoading } =
     useAppSelector().categories;
 
   const formik = useFormik({
@@ -44,7 +45,7 @@ export const useEditProduct = () => {
     onReset: () => ({ ...initialValues, id: params.id }),
     onSubmit: (values) => {
       dispatch(editProductAsync(values)).then(() => {
-        formik.resetForm();
+        navigate(paths.products);
       });
     },
   });
@@ -53,11 +54,11 @@ export const useEditProduct = () => {
     formik.setFieldValue('category', optionValue);
   };
 
-  const showError = (key: keyof typeof formik.values) =>
+  const showError = (key: keyof typeof initialValues) =>
     formik.touched[key] && formik.errors[key] ? formik.errors[key] : '';
 
   const createInputProps = (
-    name: keyof typeof formik.values,
+    name: keyof typeof initialValues,
     type = 'text',
   ) => ({
     error: showError(name),
@@ -69,7 +70,7 @@ export const useEditProduct = () => {
   });
 
   const isError = !!Object.keys(formik.errors).length;
-  const isLoading = editProductsLoading || getCategoriesLoading;
+  const isLoading = productsLoading || categoriesLoading;
 
   useEffect(() => {
     !categoryOptions.length && dispatch(getCategoriesAsync());
@@ -78,12 +79,14 @@ export const useEditProduct = () => {
   useEffect(() => {
     selectedProduct
       ? formik.resetForm({ values: selectedProduct })
-      : dispatch(getProductAsync(params.id));
+      : dispatch(getProductAsync(params.id)).then((reduxRes) =>
+          !reduxRes.payload
+            ? navigate(paths.products)
+            : formik.resetForm({
+                values: reduxRes.payload as Product,
+              }),
+        );
   }, []);
-
-  useEffect(() => {
-    !isLoading && !selectedProduct && navigate(paths.products);
-  }, [isLoading, selectedProduct]);
 
   return {
     categoryOptions,

@@ -63,7 +63,7 @@ export const productSlice = createSlice({
       state.loading = true;
     });
     builder.addCase(editProductAsync.fulfilled, (state, action) => {
-      state.products.map((product) =>
+      state.products = state.products.map((product) =>
         product.id === action.payload.id ? action.payload : product,
       );
       state.loading = false;

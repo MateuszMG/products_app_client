@@ -5,6 +5,7 @@ import { CategoryState } from './categoryTypes';
 
 const initialState: CategoryState = {
   categories: [],
+  categoryOptions: [],
   loading: false,
 };
 
@@ -18,6 +19,10 @@ export const categorySlice = createSlice({
     });
     builder.addCase(getCategoriesAsync.fulfilled, (state, action) => {
       state.categories = action.payload;
+      state.categoryOptions = ['', ...action.payload].map((category) => ({
+        label: category,
+        value: category,
+      }));
       state.loading = false;
     });
     builder.addCase(getCategoriesAsync.rejected, (state) => {

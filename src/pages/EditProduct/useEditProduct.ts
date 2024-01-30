@@ -1,5 +1,5 @@
 import { useFormik } from 'formik';
-import { useEffect, useMemo } from 'react';
+import { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { Option } from '../../components/global/inputs/SelectInput/SelectInput';
@@ -35,7 +35,7 @@ export const useEditProduct = () => {
 
   const { loading: editProductsLoading, selectedProduct } =
     useAppSelector().products;
-  const { categories, loading: getCategoriesLoading } =
+  const { categoryOptions, loading: getCategoriesLoading } =
     useAppSelector().categories;
 
   const formik = useFormik({
@@ -48,15 +48,6 @@ export const useEditProduct = () => {
       });
     },
   });
-
-  const categoryOptions: Option[] = useMemo(
-    () =>
-      ['', ...categories].map((category) => ({
-        label: category,
-        value: category,
-      })),
-    [categories.length],
-  );
 
   const handleCategoryChange = (optionValue: Option['value']) => {
     formik.setFieldValue('category', optionValue);
@@ -81,8 +72,8 @@ export const useEditProduct = () => {
   const isLoading = editProductsLoading || getCategoriesLoading;
 
   useEffect(() => {
-    !categories.length && dispatch(getCategoriesAsync());
-  }, [categories.length]);
+    !categoryOptions.length && dispatch(getCategoriesAsync());
+  }, []);
 
   useEffect(() => {
     selectedProduct

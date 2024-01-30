@@ -23,6 +23,7 @@ interface Params {
 const initialValues = {
   id: '',
   name: '',
+  description: '',
   price: 0,
   quantity: 0,
   category: '',

@@ -6,10 +6,8 @@ export const Container = styled.div`
   gap: 16px;
 `;
 
-export const Wrapper = styled.div`
-  display: flex;
-`;
-
 export const Title = styled.p`
-  width: 200px;
+  margin-bottom: 4px;
+  min-width: 150px;
+  text-indent: -8px;
 `;

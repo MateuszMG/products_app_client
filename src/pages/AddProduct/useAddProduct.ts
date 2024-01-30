@@ -14,6 +14,7 @@ import { useAppDispatch, useAppSelector } from '../../redux/store';
 
 const initialValues: AddProductSchema = {
   name: '',
+  description: '',
   price: 0,
   quantity: 0,
   category: '',

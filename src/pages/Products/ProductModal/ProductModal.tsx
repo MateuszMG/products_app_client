@@ -2,7 +2,7 @@ import { Modal } from '../../../components/global/Modal/Modal';
 
 import { UseModal } from '../../../hooks/useModal';
 
-import { Container, Title, Wrapper } from './ProductModal.styled';
+import { Container, Title } from './ProductModal.styled';
 
 import { Product } from '../../../redux/products/productTypes';
 
@@ -11,35 +11,41 @@ interface ProductModalProps extends UseModal {
 }
 
 export const ProductModal = ({ product, ...modal }: ProductModalProps) => {
-  const { category, name, price, productionDate, quantity } = product;
+  const { category, description, name, price, productionDate, quantity } =
+    product;
 
   return (
     <Modal {...modal}>
       <Container>
-        <Wrapper>
+        <div>
           <Title>Name:</Title>
           <p>{name}</p>
-        </Wrapper>
+        </div>
 
-        <Wrapper>
+        <div>
+          <Title>Description:</Title>
+          <p>{description}</p>
+        </div>
+
+        <div>
           <Title>Category:</Title>
           <p>{category}</p>
-        </Wrapper>
+        </div>
 
-        <Wrapper>
+        <div>
           <Title>Price:</Title>
           <p>{price}</p>
-        </Wrapper>
+        </div>
 
-        <Wrapper>
+        <div>
           <Title>Quantity:</Title>
           <p>{quantity}</p>
-        </Wrapper>
+        </div>
 
-        <Wrapper>
+        <div>
           <Title>Production date:</Title>
           <p>{productionDate}</p>
-        </Wrapper>
+        </div>
       </Container>
     </Modal>
   );

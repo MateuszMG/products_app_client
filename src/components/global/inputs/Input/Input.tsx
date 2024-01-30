@@ -1,4 +1,4 @@
-import { forwardRef, InputHTMLAttributes, useEffect } from 'react';
+import { forwardRef, InputHTMLAttributes } from 'react';
 
 import { InputTag } from './Input.styled';
 

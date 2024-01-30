@@ -19,6 +19,7 @@ const initialValues: AddProductSchema = {
   category: '',
   productionDate: '',
 };
+type FormikKeys = keyof typeof initialValues;
 
 export const useAddProduct = () => {
   const dispatch = useAppDispatch();
@@ -41,13 +42,10 @@ export const useAddProduct = () => {
     formik.setFieldValue('category', optionValue);
   };
 
-  const showError = (key: keyof typeof formik.values) =>
+  const showError = (key: FormikKeys) =>
     formik.touched[key] && formik.errors[key] ? formik.errors[key] : '';
 
-  const createInputProps = (
-    name: keyof typeof formik.values,
-    type = 'text',
-  ) => ({
+  const createInputProps = (name: FormikKeys, type = 'text') => ({
     error: showError(name),
     name,
     onBlur: formik.handleBlur,

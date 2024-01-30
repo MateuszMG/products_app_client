@@ -29,6 +29,8 @@ const initialValues = {
   productionDate: '',
 };
 
+type FormikKeys = keyof typeof initialValues;
+
 export const useEditProduct = () => {
   const params = useParams() as unknown as Params;
   const navigate = useNavigate();
@@ -54,13 +56,10 @@ export const useEditProduct = () => {
     formik.setFieldValue('category', optionValue);
   };
 
-  const showError = (key: keyof typeof initialValues) =>
+  const showError = (key: FormikKeys) =>
     formik.touched[key] && formik.errors[key] ? formik.errors[key] : '';
 
-  const createInputProps = (
-    name: keyof typeof initialValues,
-    type = 'text',
-  ) => ({
+  const createInputProps = (name: FormikKeys, type = 'text') => ({
     error: showError(name),
     name,
     onBlur: formik.handleBlur,

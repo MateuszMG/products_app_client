@@ -1,4 +1,4 @@
-import { styled } from 'styled-components';
+import { css, styled } from 'styled-components';
 
 export const Container = styled.div`
   display: flex;
@@ -6,8 +6,11 @@ export const Container = styled.div`
   gap: 16px;
 `;
 
-export const Title = styled.p`
-  margin-bottom: 4px;
-  min-width: 150px;
-  text-indent: -8px;
-`;
+export const Title = styled.p(
+  ({ theme: { colors } }) => css`
+    color: ${colors.primary};
+    margin-bottom: 4px;
+    min-width: 150px;
+    text-indent: -8px;
+  `,
+);

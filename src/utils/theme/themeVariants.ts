@@ -9,5 +9,4 @@ export type ThemeType = typeof darkTheme;
 
 export const themeVariants = {
   [Theme.DARK]: darkTheme,
-  // [Theme.LIGHT]: lightTheme,
 };

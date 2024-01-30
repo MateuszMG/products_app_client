@@ -6,7 +6,6 @@ import {
   getProductAsync,
   getProductsAsync,
 } from './productActions';
-import { Product, ProductState } from './productTypes';
 
 const initialState: ProductState = {
   products: [],

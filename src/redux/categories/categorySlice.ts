@@ -1,7 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 import { getCategoriesAsync } from './categoryActions';
-import { CategoryState } from './categoryTypes';
 
 const initialState: CategoryState = {
   categories: [],

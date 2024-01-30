@@ -2,8 +2,6 @@ import { useFormik } from 'formik';
 import { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
-import { Option } from '../../components/global/inputs/SelectInput/SelectInput';
-
 import { editProductSchema } from '../../utils/validations/productValidation';
 
 import { paths } from '../../routes/paths';
@@ -13,7 +11,6 @@ import {
   editProductAsync,
   getProductAsync,
 } from '../../redux/products/productActions';
-import { Product } from '../../redux/products/productTypes';
 import { useAppDispatch, useAppSelector } from '../../redux/store';
 
 interface Params {

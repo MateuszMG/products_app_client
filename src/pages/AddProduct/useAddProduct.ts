@@ -1,8 +1,6 @@
 import { useFormik } from 'formik';
 import { useEffect } from 'react';
 
-import { Option } from '../../components/global/inputs/SelectInput/SelectInput';
-
 import {
   AddProductSchema,
   addProductSchema,

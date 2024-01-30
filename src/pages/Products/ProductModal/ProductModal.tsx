@@ -4,8 +4,6 @@ import { UseModal } from '../../../hooks/useModal';
 
 import { Container, Title } from './ProductModal.styled';
 
-import { Product } from '../../../redux/products/productTypes';
-
 interface ProductModalProps extends UseModal {
   product: Product;
 }

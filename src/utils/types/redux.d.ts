@@ -1,4 +1,4 @@
-export interface Product {
+interface Product {
   id: string;
   name: string;
   description: string;
@@ -8,8 +8,16 @@ export interface Product {
   productionDate: string;
 }
 
-export interface ProductState {
+interface ProductState {
   products: Product[];
   selectedProduct?: Product;
+  loading: boolean;
+}
+
+type Category = string;
+
+interface CategoryState {
+  categories: Category[];
+  categoryOptions: Option[];
   loading: boolean;
 }

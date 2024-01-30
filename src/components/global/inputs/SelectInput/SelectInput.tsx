@@ -4,12 +4,7 @@ import { OptionTag, SelectTag } from './SelectInput.styled';
 
 import { InputBox } from '../../InputBox/InputBox';
 
-export interface Option {
-  label: string;
-  value: string;
-}
-
-interface SelectInputProps
+export interface SelectInputProps
   extends Omit<InputHTMLAttributes<HTMLSelectElement>, 'onChange'> {
   error?: string;
   label?: string;

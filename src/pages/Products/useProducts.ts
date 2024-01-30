@@ -7,7 +7,6 @@ import { paths } from '../../routes/paths';
 
 import { getProductsAsync } from '../../redux/products/productActions';
 import { setSelectedProduct } from '../../redux/products/productSlice';
-import { Product } from '../../redux/products/productTypes';
 import { useAppDispatch, useAppSelector } from '../../redux/store';
 
 export const useProducts = () => {

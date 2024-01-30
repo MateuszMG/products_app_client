@@ -8,8 +8,6 @@ import {
   EditProductSchema,
 } from '../../utils/validations/productValidation';
 
-import { Product } from './productTypes';
-
 export const getProductsAsync = createAsyncThunk<Product[]>(
   'products/getProducts',
   async (_, { rejectWithValue }) => {

@@ -3,8 +3,6 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { axiosInstance } from '../../utils/baseAxios';
 import { errorToast } from '../../utils/toast/errorToast';
 
-import { Category } from './categoryTypes';
-
 export const getCategoriesAsync = createAsyncThunk<Category[]>(
   'categories/getCategories',
   async (_, { rejectWithValue }) => {

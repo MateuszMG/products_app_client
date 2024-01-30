@@ -65,3 +65,20 @@ export const editProductAsync = createAsyncThunk<Product, EditProductSchema>(
     }
   },
 );
+
+export const deleteProductAsync = createAsyncThunk<{ id: string }, string>(
+  'products/deleteProduct',
+  async (id: string, { rejectWithValue }) => {
+    try {
+      await axiosInstance.delete(`/api/product`, {
+        params: { id },
+      });
+
+      toast.success('Product deleted successfully');
+      return { id } as any;
+    } catch (error) {
+      errorToast(error);
+      rejectWithValue(error);
+    }
+  },
+);

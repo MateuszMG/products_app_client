@@ -2,6 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import {
   addProductAsync,
+  deleteProductAsync,
   editProductAsync,
   getProductAsync,
   getProductsAsync,
@@ -68,6 +69,19 @@ export const productSlice = createSlice({
       state.loading = false;
     });
     builder.addCase(editProductAsync.rejected, (state) => {
+      state.loading = false;
+    });
+
+    builder.addCase(deleteProductAsync.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(deleteProductAsync.fulfilled, (state, action) => {
+      state.products = state.products.filter(
+        (product) => product.id !== action.payload.id,
+      );
+      state.loading = false;
+    });
+    builder.addCase(deleteProductAsync.rejected, (state) => {
       state.loading = false;
     });
   },

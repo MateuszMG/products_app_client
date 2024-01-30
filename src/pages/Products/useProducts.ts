@@ -5,7 +5,10 @@ import { useModal } from '../../hooks/useModal';
 
 import { paths } from '../../routes/paths';
 
-import { getProductsAsync } from '../../redux/products/productActions';
+import {
+  deleteProductAsync,
+  getProductsAsync,
+} from '../../redux/products/productActions';
 import { setSelectedProduct } from '../../redux/products/productSlice';
 import { useAppDispatch, useAppSelector } from '../../redux/store';
 
@@ -33,12 +36,17 @@ export const useProducts = () => {
     productModal.handleOpen();
   };
 
+  const deleteProduct = (id: string) => {
+    dispatch(deleteProductAsync(id));
+  };
+
   useEffect(() => {
     if (products.length) return;
     dispatch(getProductsAsync());
   }, []);
 
   return {
+    deleteProduct,
     handleOpenProduct,
     loading,
     openedProduct,

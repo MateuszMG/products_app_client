@@ -12,6 +12,7 @@ import { useProducts } from './useProducts';
 
 export const Products = () => {
   const {
+    deleteProduct,
     handleOpenProduct,
     loading,
     openedProduct,
@@ -41,7 +42,7 @@ export const Products = () => {
               </Name>
               <div>
                 <EditIcon onClick={() => redirectToEditProductPage(product)} />
-                <DeleteIcon />
+                <DeleteIcon onClick={() => deleteProduct(product.id)} />
               </div>
             </Row>
           ))}

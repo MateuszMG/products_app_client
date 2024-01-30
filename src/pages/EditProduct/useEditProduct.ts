@@ -1,18 +1,26 @@
 import { useFormik } from 'formik';
 import { useEffect, useMemo } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import { Option } from '../../components/global/inputs/SelectInput/SelectInput';
 
-import {
-  AddProductSchema,
-  addProductSchema,
-} from '../../utils/validations/productValidation';
+import { editProductSchema } from '../../utils/validations/productValidation';
+
+import { paths } from '../../routes/paths';
 
 import { getCategoriesAsync } from '../../redux/categories/categoryActions';
-import { addProductAsync } from '../../redux/products/productActions';
+import {
+  editProductAsync,
+  getProductAsync,
+} from '../../redux/products/productActions';
 import { useAppDispatch, useAppSelector } from '../../redux/store';
 
-const initialValues: AddProductSchema = {
+interface Params {
+  id: string;
+}
+
+const initialValues = {
+  id: '',
   name: '',
   price: 0,
   quantity: 0,
@@ -20,18 +28,22 @@ const initialValues: AddProductSchema = {
   productionDate: '',
 };
 
-export const useAddProduct = () => {
+export const useEditProduct = () => {
+  const params = useParams() as unknown as Params;
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const { loading: addProductsLoading } = useAppSelector().products;
+
+  const { loading: editProductsLoading, selectedProduct } =
+    useAppSelector().products;
   const { categories, loading: getCategoriesLoading } =
     useAppSelector().categories;
 
   const formik = useFormik({
     initialValues,
-    validationSchema: addProductSchema,
-    onReset: () => initialValues,
+    validationSchema: editProductSchema,
+    onReset: () => ({ ...initialValues, id: params.id }),
     onSubmit: (values) => {
-      dispatch(addProductAsync(values)).then(() => {
+      dispatch(editProductAsync(values)).then(() => {
         formik.resetForm();
       });
     },
@@ -66,12 +78,21 @@ export const useAddProduct = () => {
   });
 
   const isError = !!Object.keys(formik.errors).length;
-  const isLoading = addProductsLoading || getCategoriesLoading;
+  const isLoading = editProductsLoading || getCategoriesLoading;
 
   useEffect(() => {
-    if (categories.length) return;
-    dispatch(getCategoriesAsync());
+    !categories.length && dispatch(getCategoriesAsync());
   }, [categories.length]);
+
+  useEffect(() => {
+    selectedProduct
+      ? formik.resetForm({ values: selectedProduct })
+      : dispatch(getProductAsync(params.id));
+  }, []);
+
+  useEffect(() => {
+    !isLoading && !selectedProduct && navigate(paths.products);
+  }, [isLoading, selectedProduct]);
 
   return {
     categoryOptions,

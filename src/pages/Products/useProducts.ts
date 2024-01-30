@@ -6,15 +6,17 @@ import { useModal } from '../../hooks/useModal';
 import { paths } from '../../routes/paths';
 
 import { getProductsAsync } from '../../redux/products/productActions';
+import { setSelectedProduct } from '../../redux/products/productSlice';
 import { Product } from '../../redux/products/productTypes';
 import { useAppDispatch, useAppSelector } from '../../redux/store';
 
 export const useProducts = () => {
   const navigate = useNavigate();
+
   const dispatch = useAppDispatch();
 
   const productModal = useModal();
-  const [selectedProduct, setSelectedProduct] = useState<Product>();
+  const [openedProduct, setOpenedProduct] = useState<Product>();
 
   const { loading, products } = useAppSelector().products;
 
@@ -22,8 +24,13 @@ export const useProducts = () => {
     navigate(paths.addProduct);
   };
 
+  const redirectToEditProductPage = (product: Product) => {
+    dispatch(setSelectedProduct(product));
+    navigate(paths.editProduct(product.id));
+  };
+
   const handleOpenProduct = (product: Product) => {
-    setSelectedProduct(product);
+    setOpenedProduct(product);
     productModal.handleOpen();
   };
 
@@ -35,9 +42,10 @@ export const useProducts = () => {
   return {
     handleOpenProduct,
     loading,
+    openedProduct,
     productModal,
     products,
     redirectToAddProductPage,
-    selectedProduct,
+    redirectToEditProductPage,
   };
 };

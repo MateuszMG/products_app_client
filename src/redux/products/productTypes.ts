@@ -9,5 +9,6 @@ export interface Product {
 
 export interface ProductState {
   products: Product[];
+  selectedProduct?: Product;
   loading: boolean;
 }

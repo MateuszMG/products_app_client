@@ -1,6 +1,7 @@
 export const paths = {
   products: '/',
-  addProduct: '/product/add',
+  addProduct: '/products/add',
+  editProduct: (id: string) => `/products/${id}/edit`,
 
   all: '*',
 };

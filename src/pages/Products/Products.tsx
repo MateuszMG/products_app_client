@@ -14,10 +14,11 @@ export const Products = () => {
   const {
     handleOpenProduct,
     loading,
+    openedProduct,
     productModal,
     products,
     redirectToAddProductPage,
-    selectedProduct,
+    redirectToEditProductPage,
   } = useProducts();
 
   return (
@@ -39,7 +40,7 @@ export const Products = () => {
                 {product.name}
               </Name>
               <div>
-                <EditIcon />
+                <EditIcon onClick={() => redirectToEditProductPage(product)} />
                 <DeleteIcon />
               </div>
             </Row>
@@ -47,8 +48,8 @@ export const Products = () => {
         </div>
       )}
 
-      {productModal.open && selectedProduct && (
-        <ProductModal {...productModal} product={selectedProduct} />
+      {productModal.open && openedProduct && (
+        <ProductModal {...productModal} product={openedProduct} />
       )}
     </div>
   );

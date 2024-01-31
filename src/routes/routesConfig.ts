@@ -1,8 +1,20 @@
-import { AddProduct } from '../pages/AddProduct/AddProduct';
-import { EditProduct } from '../pages/EditProduct/EditProduct';
+import { lazy } from 'react';
+
 import { Products } from '../pages/Products/Products';
 
 import { paths } from './paths';
+
+const AddProduct = lazy(() =>
+  import('../pages/AddProduct/AddProduct').then(({ AddProduct }) => ({
+    default: AddProduct,
+  })),
+);
+
+const EditProduct = lazy(() =>
+  import('../pages/EditProduct/EditProduct').then(({ EditProduct }) => ({
+    default: EditProduct,
+  })),
+);
 
 export const routesConfig = [
   {

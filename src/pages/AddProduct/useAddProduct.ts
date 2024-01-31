@@ -22,6 +22,7 @@ type FormikKeys = keyof typeof initialValues;
 
 export const useAddProduct = () => {
   const dispatch = useAppDispatch();
+
   const { loading: addProductsLoading } = useAppSelector().products;
   const { categoryOptions, loading: getCategoriesLoading } =
     useAppSelector().categories;

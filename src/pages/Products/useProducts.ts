@@ -14,7 +14,6 @@ import { useAppDispatch, useAppSelector } from '../../redux/store';
 
 export const useProducts = () => {
   const navigate = useNavigate();
-
   const dispatch = useAppDispatch();
 
   const productModal = useModal();
@@ -41,8 +40,7 @@ export const useProducts = () => {
   };
 
   useEffect(() => {
-    if (products.length) return;
-    dispatch(getProductsAsync());
+    !products.length && dispatch(getProductsAsync());
   }, []);
 
   return {

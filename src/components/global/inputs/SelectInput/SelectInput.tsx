@@ -17,12 +17,17 @@ export const SelectInput = forwardRef<HTMLSelectElement, SelectInputProps>(
     return (
       <InputBox {...{ label, error, name: rest.name }}>
         <SelectTag
+          data-testid={`select__${rest.name}`}
           onChange={(e) => onChange(e.currentTarget.value)}
           {...rest}
           ref={ref}
         >
           {options.map((option) => (
-            <OptionTag key={option.value} value={option.value}>
+            <OptionTag
+              key={option.value}
+              data-testid={`option__${option.label}`}
+              value={option.value}
+            >
               {option.label}
             </OptionTag>
           ))}

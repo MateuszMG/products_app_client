@@ -9,6 +9,7 @@
     "format": "prettier --write 'src/**/*.{ts,tsx,css,md,json}' --config ./.prettierrc",
     "build": "react-scripts build",
     "prepare": "husky install",
+    "cy": "cypress open",
     "release": "release-it"
   },
   "dependencies": {
@@ -32,6 +33,7 @@
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@release-it/conventional-changelog": "^8.0.1",
+    "@testing-library/cypress": "^10.0.1",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
@@ -43,6 +45,7 @@
     "@types/react-icons": "^3.0.0",
     "@types/styled-components": "^5.1.34",
     "@types/yup": "^0.32.0",
+    "cypress": "^13.6.4",
     "husky": "^8.0.3",
     "prettier": "^2.8.1",
     "release-it": "^17.0.3",

@@ -36,10 +36,15 @@ export const AddProduct = () => {
         <Input {...createInputProps('productionDate', 'date')} />
 
         <Form.ButtonsWrapper>
-          <Button isLoading={isLoading} isError={isError} type='reset'>
+          <Button isError={isError} isLoading={isLoading} type='reset'>
             Reset
           </Button>
-          <Button isLoading={isLoading} isError={isError} type='submit'>
+          <Button
+            isError={isError}
+            isLoading={isLoading}
+            testId='button__submit'
+            type='submit'
+          >
             Submit
           </Button>
         </Form.ButtonsWrapper>

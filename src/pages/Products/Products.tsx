@@ -26,7 +26,10 @@ export const Products = () => {
     <div>
       <Header>
         <strong>Add product</strong>
-        <AddIcon onClick={redirectToAddProductPage} />
+        <AddIcon
+          data-testid='button__addProduct'
+          onClick={redirectToAddProductPage}
+        />
       </Header>
 
       {loading ? (

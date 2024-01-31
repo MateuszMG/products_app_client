@@ -42,7 +42,9 @@ export const addProductAsync = createAsyncThunk<Product, AddProductSchema>(
     try {
       const res = await axiosInstance.post(`/api/product`, product);
 
-      toast.success('Product added successfully');
+      toast.success('Product added successfully', {
+        toastId: 'toast__addProduct',
+      });
       return res.data.newProduct;
     } catch (error) {
       errorToast(error);

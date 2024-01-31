@@ -13,7 +13,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
   ({ label, error, ...rest }: InputProps, ref) => {
     return (
       <InputBox {...{ label, error, name: rest.name }}>
-        <InputTag {...rest} ref={ref} />
+        <InputTag data-testid={`input__${rest.name}`} {...rest} ref={ref} />
       </InputBox>
     );
   },

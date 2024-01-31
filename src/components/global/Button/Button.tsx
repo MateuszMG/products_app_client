@@ -8,16 +8,25 @@ interface GlobalButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: string | ReactNode;
   isError?: boolean;
   isLoading?: boolean;
+  testId?: string;
 }
 
 export const Button = forwardRef<HTMLButtonElement, GlobalButtonProps>(
   (
-    { children, disabled, isError, isLoading, ...rest }: GlobalButtonProps,
+    {
+      children,
+      disabled,
+      isError,
+      isLoading,
+      testId,
+      ...rest
+    }: GlobalButtonProps,
     ref,
   ) => {
     return (
       <ButtonTag
         {...rest}
+        data-testid={testId}
         disabled={disabled || isLoading || isError}
         ref={ref}
       >

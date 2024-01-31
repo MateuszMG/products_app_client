@@ -16,7 +16,7 @@ export const TextareaInput = ({
 }: TextareaInputProps) => {
   return (
     <InputBox {...{ label, error, name: rest.name }}>
-      <TextareaTag {...rest} />
+      <TextareaTag data-testid={`textarea__${rest.name}`} {...rest} />
     </InputBox>
   );
 };
